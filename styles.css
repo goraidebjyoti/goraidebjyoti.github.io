@@ -265,4 +265,33 @@ section h2:after {
         font-size: 1em;
         margin: 0 10px;
     }
+
 }
+
+.projects-subtitle {
+    margin: 40px 0 20px;
+    font-size: 1.4em;
+    color: #00695c;
+    text-align: center;
+}
+
+.project-links {
+    margin-top: 10px;
+}
+
+.project-links a {
+    color: #00838f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.project-links a:hover {
+    text-decoration: underline;
+}
+
+.project-duration {
+    font-size: 0.9em;
+    font-weight: normal;
+    color: #777;
+}
+
