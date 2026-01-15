@@ -19,7 +19,7 @@ body {
 .hero {
     background-color: #e0f7fa; /* Very light cyan background for hero section */
     color: #006064; /* Dark cyan text for hero section */
-    padding: 100px 0;
+    padding: 60px 0;
     text-align: center;
 }
 
@@ -294,4 +294,5 @@ section h2:after {
     font-weight: normal;
     color: #777;
 }
+
 
