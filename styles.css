@@ -67,7 +67,7 @@ body {
 
 /* Sections */
 section {
-    padding: 60px 0;
+    padding: 40px 0;
     background-color: #fff;
     border-bottom: 1px solid #eee;
 }
@@ -79,10 +79,13 @@ section:last-of-type {
 section h2 {
     font-size: 2em;
     color: #004d40;
-    margin-bottom: 1em;
     text-align: center;
     position: relative;
-    padding-bottom: 20px;
+
+    margin-top: 0;        /* removes extra space above heading */
+    margin-bottom: 25px;  /* controlled spacing below */
+
+    padding-bottom: 15px; /* slightly reduced underline spacing */
     border-bottom: 3px solid #b2dfdb;
     display: inline-block;
 }
@@ -102,6 +105,10 @@ section h2:before {
 
 section h2:after {
     right: -30px;
+}
+
+section + section {
+    margin-top: 0;
 }
 
 /* Typography */
@@ -308,3 +315,4 @@ section h2:after {
         margin: 0 10px;
     }
 }
+
