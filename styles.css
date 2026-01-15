@@ -21,24 +21,24 @@ body {
 .hero {
     background-color: #e0f7fa;
     color: #006064;
-    padding: 60px 0; /* reduced to avoid empty feel */
+    padding: 60px 0;
     text-align: center;
 }
 
 .hero h1 {
     font-size: 2.5em;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: bold;
 }
 
 .hero .subtitle {
     font-size: 1.2em;
     color: #26a69a;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .hero .contact-info {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .hero .contact-info a {
@@ -51,12 +51,12 @@ body {
     text-decoration: underline;
 }
 
-/* Optional visual anchor (small divider under name) */
+/* Small visual anchor */
 .hero-divider {
     width: 60px;
     height: 3px;
     background-color: #26a69a;
-    margin: 20px auto;
+    margin: 18px auto;
     border-radius: 2px;
 }
 
@@ -67,7 +67,7 @@ body {
 
 /* Sections */
 section {
-    padding: 40px 0;
+    padding: 36px 0;          /* reduced for tighter vertical rhythm */
     background-color: #fff;
     border-bottom: 1px solid #eee;
 }
@@ -76,16 +76,17 @@ section:last-of-type {
     border-bottom: none;
 }
 
+/* Section headings */
 section h2 {
     font-size: 2em;
     color: #004d40;
     text-align: center;
     position: relative;
 
-    margin-top: 0;        /* removes extra space above heading */
-    margin-bottom: 25px;  /* controlled spacing below */
+    margin-top: 0;            /* critical: removes large space above */
+    margin-bottom: 22px;      /* controlled spacing below heading */
 
-    padding-bottom: 15px; /* slightly reduced underline spacing */
+    padding-bottom: 14px;
     border-bottom: 3px solid #b2dfdb;
     display: inline-block;
 }
@@ -107,6 +108,7 @@ section h2:after {
     right: -30px;
 }
 
+/* Prevent stacking extra whitespace between sections */
 section + section {
     margin-top: 0;
 }
@@ -126,7 +128,7 @@ section + section {
 .experience-item,
 .project-item,
 .education-item {
-    margin-bottom: 25px;
+    margin-bottom: 22px;      /* slightly tighter */
     padding: 20px;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -138,7 +140,7 @@ section + section {
 .education-item h3 {
     color: #00838f;
     margin-top: 0;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
 }
 
 .experience-item .organization,
@@ -148,7 +150,7 @@ section + section {
     font-style: italic;
     color: #777;
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
 }
 
 .project-item p a {
@@ -162,14 +164,14 @@ section + section {
 
 /* Projects */
 .projects-subtitle {
-    margin: 40px 0 20px;
-    font-size: 1.4em;
+    margin: 28px 0 16px;      /* reduced top margin */
+    font-size: 1.35em;
     color: #00695c;
     text-align: center;
 }
 
 .project-links {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .project-links a {
@@ -190,12 +192,12 @@ section + section {
 
 /* Skills */
 .skills-category {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .skills-category h3 {
     color: #00695c;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
     border-bottom: 2px dotted #b2dfdb;
     padding-bottom: 5px;
 }
@@ -211,7 +213,7 @@ section + section {
     background-color: #e0f7fa;
     color: #004d40;
     margin: 5px 10px 5px 0;
-    padding: 8px 15px;
+    padding: 8px 14px;
     border-radius: 20px;
     font-size: 0.9em;
 }
@@ -234,21 +236,21 @@ section + section {
 .contact-footer {
     background-color: #004d40;
     color: #fff;
-    padding: 50px 0;
+    padding: 45px 0;
     text-align: center;
 }
 
 .contact-footer h2 {
     color: #fff;
     font-size: 2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
     border-bottom: 2px solid #80cbc4;
     padding-bottom: 10px;
     display: inline-block;
 }
 
 .contact-footer p {
-    margin-bottom: 1em;
+    margin-bottom: 0.8em;
     color: #b2dfdb;
 }
 
@@ -264,7 +266,7 @@ section + section {
 }
 
 .contact-footer .copyright {
-    margin-top: 2em;
+    margin-top: 1.8em;
     font-size: 0.9em;
     color: #80cbc4;
 }
@@ -277,7 +279,7 @@ section + section {
     }
 
     .hero {
-        padding: 50px 0; /* reduced for mobile */
+        padding: 48px 0;
     }
 
     .hero h1 {
@@ -289,11 +291,13 @@ section + section {
     }
 
     section {
-        padding: 40px 0;
+        padding: 28px 0;      /* tighter on mobile */
     }
 
     section h2 {
         font-size: 1.7em;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
     }
 
     .skills-category ul li {
@@ -315,4 +319,3 @@ section + section {
         margin: 0 10px;
     }
 }
-
