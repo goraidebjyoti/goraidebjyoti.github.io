@@ -1,14 +1,15 @@
 /* styles.css */
 
 body {
-    font-family: 'Open Sans', sans-serif; /* A clean, readable font */
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Light grey background */
-    color: #333; /* Dark grey text */
+    background-color: #f4f4f4;
+    color: #333;
     line-height: 1.6;
 }
 
+/* Layout */
 .container {
     width: 80%;
     max-width: 1200px;
@@ -16,23 +17,28 @@ body {
     padding: 20px;
 }
 
+/* Hero Section */
 .hero {
-    background-color: #e0f7fa; /* Very light cyan background for hero section */
-    color: #006064; /* Dark cyan text for hero section */
-    padding: 60px 0;
+    background-color: #e0f7fa;
+    color: #006064;
+    padding: 60px 0; /* reduced to avoid empty feel */
     text-align: center;
 }
 
 .hero h1 {
     font-size: 2.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
 .hero .subtitle {
     font-size: 1.2em;
-    color: #26a69a; /* Slightly lighter cyan for subtitle */
-    margin-bottom: 1em;
+    color: #26a69a;
+    margin-bottom: 15px;
+}
+
+.hero .contact-info {
+    margin-top: 10px;
 }
 
 .hero .contact-info a {
@@ -45,31 +51,40 @@ body {
     text-decoration: underline;
 }
 
-.separator {
-    margin: 0 5px;
-    color: #26a69a; /* Separator color matching subtitle */
+/* Optional visual anchor (small divider under name) */
+.hero-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #26a69a;
+    margin: 20px auto;
+    border-radius: 2px;
 }
 
+.separator {
+    margin: 0 5px;
+    color: #26a69a;
+}
 
+/* Sections */
 section {
     padding: 60px 0;
-    background-color: #fff; /* White background for sections */
-    border-bottom: 1px solid #eee; /* Light border to separate sections */
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
 }
 
 section:last-of-type {
-    border-bottom: none; /* No border for the last section */
+    border-bottom: none;
 }
 
 section h2 {
     font-size: 2em;
-    color: #004d40; /* Darker teal for section titles */
+    color: #004d40;
     margin-bottom: 1em;
     text-align: center;
     position: relative;
     padding-bottom: 20px;
-    border-bottom: 3px solid #b2dfdb; /* Teal border under section titles */
-    display: inline-block; /* To make border width adjust to text */
+    border-bottom: 3px solid #b2dfdb;
+    display: inline-block;
 }
 
 section h2:before,
@@ -77,7 +92,7 @@ section h2:after {
     content: '';
     position: absolute;
     bottom: -3px;
-    border-bottom: 8px solid #80cbc4; /* Lighter teal border accent */
+    border-bottom: 8px solid #80cbc4;
     width: 20px;
 }
 
@@ -89,7 +104,7 @@ section h2:after {
     right: -30px;
 }
 
-
+/* Typography */
 .about-me .container p,
 .work-experience .container p,
 .projects-section .container p,
@@ -97,24 +112,24 @@ section h2:after {
 .technical-skills .container ul,
 .education-section .container p,
 .education-section .container .degree {
-    color: #555; /* Medium grey for body text in sections */
+    color: #555;
 }
 
-
+/* Cards */
 .experience-item,
 .project-item,
 .education-item {
     margin-bottom: 25px;
     padding: 20px;
     border-radius: 8px;
-    background-color: #f9f9f9; /* Very light grey for item backgrounds */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .experience-item h3,
 .project-item h3,
 .education-item h3 {
-    color: #00838f; /* Teal for item titles */
+    color: #00838f;
     margin-top: 0;
     margin-bottom: 0.5em;
 }
@@ -124,8 +139,8 @@ section h2:after {
 .education-item .degree,
 .education-item .date {
     font-style: italic;
-    color: #777; /* Light grey italic text */
-    display: block; /* To put each on a new line */
+    color: #777;
+    display: block;
     margin-bottom: 0.5em;
 }
 
@@ -138,15 +153,43 @@ section h2:after {
     text-decoration: underline;
 }
 
+/* Projects */
+.projects-subtitle {
+    margin: 40px 0 20px;
+    font-size: 1.4em;
+    color: #00695c;
+    text-align: center;
+}
 
+.project-links {
+    margin-top: 10px;
+}
+
+.project-links a {
+    color: #00838f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.project-links a:hover {
+    text-decoration: underline;
+}
+
+.project-duration {
+    font-size: 0.9em;
+    font-weight: normal;
+    color: #777;
+}
+
+/* Skills */
 .skills-category {
     margin-bottom: 20px;
 }
 
 .skills-category h3 {
-    color: #00695c; /* Darker teal for skill category titles */
+    color: #00695c;
     margin-bottom: 0.5em;
-    border-bottom: 2px dotted #b2dfdb; /* Dotted line under skill category titles */
+    border-bottom: 2px dotted #b2dfdb;
     padding-bottom: 5px;
 }
 
@@ -158,16 +201,16 @@ section h2:after {
 }
 
 .skills-category ul li {
-    background-color: #e0f7fa; /* Light cyan for skill list items */
-    color: #004d40; /* Dark teal for skill text */
+    background-color: #e0f7fa;
+    color: #004d40;
     margin: 5px 10px 5px 0;
     padding: 8px 15px;
-    border-radius: 20px; /* Rounded corners for skill items */
+    border-radius: 20px;
     font-size: 0.9em;
 }
 
-.certifications-section ul,
-.technical-skills .container > ul {
+/* Certifications */
+.certifications-section ul {
     list-style: none;
     padding: 0;
 }
@@ -175,35 +218,35 @@ section h2:after {
 .certifications-section ul li {
     margin-bottom: 10px;
     padding: 10px 15px;
-    background-color: #f0f0f0; /* Very light grey for certification items */
+    background-color: #f0f0f0;
     border-radius: 5px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03); /* Subtle shadow for certification items */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
-
+/* Footer */
 .contact-footer {
-    background-color: #004d40; /* Dark teal footer background */
-    color: #fff; /* White text for footer */
+    background-color: #004d40;
+    color: #fff;
     padding: 50px 0;
     text-align: center;
 }
 
 .contact-footer h2 {
-    color: #fff; /* White for footer title */
+    color: #fff;
     font-size: 2em;
     margin-bottom: 0.5em;
-    border-bottom: 2px solid #80cbc4; /* Lighter teal border for footer title */
+    border-bottom: 2px solid #80cbc4;
     padding-bottom: 10px;
     display: inline-block;
 }
 
 .contact-footer p {
     margin-bottom: 1em;
-    color: #b2dfdb; /* Light teal for footer paragraph */
+    color: #b2dfdb;
 }
 
 .contact-footer .contact-info a {
-    color: #fff; /* White for footer links */
+    color: #fff;
     text-decoration: none;
     margin: 0 15px;
     font-size: 1.1em;
@@ -216,11 +259,10 @@ section h2:after {
 .contact-footer .copyright {
     margin-top: 2em;
     font-size: 0.9em;
-    color: #80cbc4; /* Lighter teal for copyright text */
+    color: #80cbc4;
 }
 
-
-/* Responsive adjustments for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -228,7 +270,7 @@ section h2:after {
     }
 
     .hero {
-        padding: 80px 0;
+        padding: 50px 0; /* reduced for mobile */
     }
 
     .hero h1 {
@@ -265,34 +307,4 @@ section h2:after {
         font-size: 1em;
         margin: 0 10px;
     }
-
 }
-
-.projects-subtitle {
-    margin: 40px 0 20px;
-    font-size: 1.4em;
-    color: #00695c;
-    text-align: center;
-}
-
-.project-links {
-    margin-top: 10px;
-}
-
-.project-links a {
-    color: #00838f;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.project-links a:hover {
-    text-decoration: underline;
-}
-
-.project-duration {
-    font-size: 0.9em;
-    font-weight: normal;
-    color: #777;
-}
-
-
