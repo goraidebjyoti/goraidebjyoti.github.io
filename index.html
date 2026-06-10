@@ -3,22 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Debjyoti Gorai - Portfolio</title>
+    <title>Debjyoti Gorai — Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="icon"
+      href="data:image/svg+xml,
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+        <circle cx='50' cy='50' r='48' fill='%23111'/>
+        <text x='50' y='63' font-size='38' font-weight='600'
+              text-anchor='middle' fill='white'
+              font-family='Inter,Arial,sans-serif'>DG</text>
+      </svg>">
 </head>
 <body>
 
+    <nav class="site-nav">
+        <div class="nav-container">
+            <span class="nav-logo">DG</span>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <header class="hero">
+        <div class="hero-bg-glow"></div>
         <div class="container">
-            <h1>DEBJYOTI GORAI</h1>
-            <p class="subtitle">Junior Project Engineer @ IIT Kharagpur</p>
+            <div class="hero-monogram">DG</div>
+            <h1>Debjyoti Gorai</h1>
+            <p class="subtitle">Junior Project Engineer &nbsp;&bull;&nbsp; IIT Kharagpur</p>
             <div class="contact-info">
-                <a href="mailto:debjyotigorai@outlook.com">debjyotigorai@outlook.com</a>
-                <span class="separator">|</span>
+                <a href="mailto:debjyotigorai@outlook.com">debjyotigorai<span class="email-at">@</span>outlook.com</a>
+                <span class="separator">/</span>
                 <a href="https://linkedin.com/in/debjyoti-gorai-515956236/" target="_blank">LinkedIn</a>
-                <span class="separator">|</span>
+                <span class="separator">/</span>
                 <a href="https://github.com/goraidebjyoti" target="_blank">GitHub</a>
             </div>
         </div>
@@ -27,22 +52,20 @@
     <section id="about" class="about-me">
         <div class="container">
             <h2>About Me</h2>
-    
-            <p>
+            <hr class="section-rule">
+            <p class="reveal">
                 I am a Junior Project Engineer at IIT Kharagpur working on AI-driven systems for
                 clinical trial retrieval and eligibility modeling. My work spans model
                 development, evaluation, and deployment, integrating large language models
                 with neural ranking and structured reasoning frameworks.
             </p>
-    
-            <p>
+            <p class="reveal">
                 Beyond core modeling, I have experience building end-to-end systems, including
-                client–server architectures, RESTful inference services, and interactive web
+                client-server architectures, RESTful inference services, and interactive web
                 interfaces, with an emphasis on reliability, interpretability, and
                 reproducibility.
             </p>
-    
-            <p>
+            <p class="reveal">
                 Earlier in my career, I gained hands-on experience in software development
                 through Android application projects and internships, which built a strong
                 foundation in system design, debugging, and user-focused development.
@@ -50,16 +73,40 @@
         </div>
     </section>
 
-
     <section id="experience" class="work-experience">
         <div class="container">
             <h2>Work Experience</h2>
-            <div class="experience-item">
-                <h3>Junior Project Engineer (Current)</h3>
-                <p class="organization">IIT Kharagpur (Department of Artificial Intelligence)</p>
-                <p class="project-name">DEVELOPING A FAIR AND INTERPRETABLE CLINICAL TRIAL SEARCH SYSTEM</p>
-                <p class="date">January 2025 - Present</p>
-                <p><strong>PI:</strong> Dr Koustav Rudra</p>
+            <hr class="section-rule">
+            <div class="experience-item card reveal">
+                <h3>Junior Project Engineer</h3>
+                <p class="organization">IIT Kharagpur &mdash; Department of Artificial Intelligence</p>
+                <p class="date">January 2025 &ndash; Present &nbsp;&middot;&nbsp; PI: Dr Koustav Rudra</p>
+                <ul class="exp-bullets">
+                    <li>Developed NEUREQ, a two-phase neural re-ranking framework for clinical trial retrieval: an LLM answers ten eligibility questions per patient–trial pair as ternary labels (YES/NO/NA) with natural-language justifications; question ID embeddings, categorical answer embeddings, and Bio_ClinicalBERT-encoded justification embeddings are concatenated per question and fed as a sequence to a BiLSTM with additive attention, whose output score is used to re-rank candidate trials — evaluated on the 2021 and 2022 TREC Clinical Trials Track datasets against a 448,000-trial corpus, achieving statistically significant nDCG@10 improvements of up to 45% over baselines; interpretability is provided via Attention &times; Gradient saliency for ranking attribution and RouteSAE-based mechanistic analysis of LLM hidden states.</li>
+                    <li>Developed TCH_CLF, a separate Longformer-based re-ranking method for clinical trial re-ranking that integrates LLM-generated eligibility reasoning with structured trial attributes via a hybrid classification and ranking objective.</li>
+                    <li>Applied prompt engineering and quantization techniques across both NEUREQ and TCH_CLF pipelines to optimise LLM output quality, structured response adherence, and inference efficiency at scale.</li>
+                    <li>Gained hands-on experience with large-scale GPU infrastructure including H100 and L40 GPUs and DGX cluster environments, learning job queue management, multi-GPU resource allocation, and diagnosing performance bottlenecks such as KV cache over-allocation and driver-level incompatibilities.</li>
+                    <li>Deployed a unified FastAPI inference server hosting both NEUREQ and TCH_CLF, with a Streamlit client interface supporting explainable eligibility scoring, batch evaluation, and audit logging for reproducible research workflows.</li>
+                    <li>Collaborated with Microsoft Research India as a Visiting Scholar (remote) on improving a WhatsApp-based medical chatbot (CataractBot) by enhancing its RAG framework for better answer accuracy and hospital-specific response grounding.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="publications-section">
+        <div class="container">
+            <h2>Publications</h2>
+            <hr class="section-rule">
+            <div class="pub-item card reveal">
+                <span class="pub-status">Under Review &mdash; CIKM 2026</span>
+                <h3>NEUREQ: Neural Ranking of Clinical Trials Using LLM-Based Eligibility Questions</h3>
+                <p class="pub-authors">Srinjoy Chanda, Debjyoti Gorai, Koustav Rudra &nbsp;&middot;&nbsp; IIT Kharagpur &nbsp;&middot;&nbsp; 2026</p>
+                <p class="pub-abstract">
+                    A two-phase re-ranking framework that uses LLM-generated eligibility question answers and justifications as structured features for a BiLSTM-based neural re-ranker. Evaluated on TREC Clinical Trials Track 2021 and 2022 datasets, achieving consistent improvements in nDCG@10 across multiple retrieval settings, with integrated mechanistic interpretability via RouteSAE sparse autoencoder analysis.
+                </p>
+                <p class="project-links">
+                    <a href="https://anonymous.4open.science/r/NEUREQ" target="_blank">Code Repository ↗</a>
+                </p>
             </div>
         </div>
     </section>
@@ -67,11 +114,11 @@
     <section id="projects" class="projects-section">
         <div class="container">
             <h2>Projects</h2>
-    
-            <!-- Research / Ongoing Projects -->
-            <h3 class="projects-subtitle">Ongoing Research Projects (IIT Kharagpur)</h3>
-    
-            <div class="project-item">
+            <hr class="section-rule">
+
+            <h3 class="projects-subtitle">Ongoing Research</h3>
+
+            <div class="project-item card reveal">
                 <h3>NEUREQ: Neural Re-ranking Using Eligibility Question Modeling</h3>
                 <p>
                     A two-phase neural re-ranking framework for clinical trial retrieval that uses
@@ -80,12 +127,11 @@
                     lightweight neural re-ranker, improving both effectiveness and transparency.
                 </p>
                 <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/NEUREQ" target="_blank">GitHub Repository</a>
+                    <a href="https://github.com/goraidebjyoti/NEUREQ" target="_blank">GitHub Repository ↗</a>
                 </p>
             </div>
 
-    
-            <div class="project-item">
+            <div class="project-item card reveal">
                 <h3>TCH_CLF: Reasoning-Augmented Teacher Classifier</h3>
                 <p>
                     A Longformer-based teacher model for clinical trial relevance modeling that
@@ -94,97 +140,80 @@
                     as a strong neural baseline for TREC-style clinical trial re-ranking experiments.
                 </p>
                 <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/TCH_CLF" target="_blank">GitHub Repository</a>
+                    <a href="https://github.com/goraidebjyoti/TCH_CLF" target="_blank">GitHub Repository ↗</a>
                 </p>
             </div>
-    
-            <div class="project-item">
-                <h3>Clinical Trial Eligibility Checker (End-to-End System)</h3>
+
+            <div class="project-item card reveal">
+                <h3>Clinical Trial Eligibility Checker</h3>
                 <p>
-                    An end-to-end client–server system for clinical trial eligibility assessment,
+                    An end-to-end client&ndash;server system for clinical trial eligibility assessment,
                     integrating NEUREQ and TCH_CLF models with a FastAPI inference server and a
                     Streamlit-based user interface. The system supports explainable eligibility scoring,
                     batch evaluation, and audit logging for reproducible research workflows.
                 </p>
                 <p class="project-links">
                     <a href="https://github.com/goraidebjyoti/ClinicalTrialEligibilityChecker" target="_blank">
-                        GitHub Repository
+                        GitHub Repository ↗
                     </a>
                 </p>
             </div>
 
-    
-            <!-- Other Projects -->
             <h3 class="projects-subtitle">Other Projects</h3>
-    
-            <div class="project-item">
-                <h3>
-                    CataractBot: WhatsApp-based Medical Chatbot for Cataract Patients
-                    <span class="project-duration">(April 2025 – July 2025)</span>
-                </h3>
+
+            <div class="project-item card reveal">
+                <h3>CataractBot RAG Enhancement</h3>
+                <p class="date">Apr 2025 &ndash; Jul 2025 &nbsp;&middot;&nbsp; Microsoft Research India (Remote, Visiting Scholar)</p>
                 <p>
-                    Academic collaboration with Microsoft Research India as a Visiting Scholar,
-                    conducted fully online alongside my role as Junior Project Engineer at IIT Kharagpur.
-                    The project involved improving an existing WhatsApp-based CataractBot by enhancing
-                    its Retrieval-Augmented Generation (RAG) framework to improve answer accuracy,
-                    reliability, and hospital-specific response grounding, with expert-in-the-loop
-                    validation.
+                    Collaborated with Microsoft Research India as a Visiting Scholar to improve
+                    CataractBot, a WhatsApp-based medical chatbot, by strengthening its retrieval-augmented
+                    generation framework for better answer accuracy and hospital-specific response grounding.
                 </p>
             </div>
 
-    
-            <div class="project-item">
+            <div class="project-item card reveal">
                 <h3>Stock Price Prediction using Machine Learning</h3>
                 <p>
                     Predicted NETFLIX stock prices using Linear Regression, KNN, and SVM,
                     with comparative evaluation using K-Fold cross-validation.
                 </p>
                 <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/Stock-Price-Prediction" target="_blank">
-                        GitHub Repository
-                    </a>
+                    <a href="https://github.com/goraidebjyoti/Stock-Price-Prediction" target="_blank">GitHub Repository ↗</a>
                 </p>
             </div>
-    
-            <div class="project-item">
+
+            <div class="project-item card reveal">
                 <h3>Unit Converter Android App</h3>
                 <p>
                     An Android application for converting values across different measurement units,
                     built using Android Studio.
                 </p>
                 <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/UnitConverterApp" target="_blank">
-                        GitHub Repository
-                    </a>
+                    <a href="https://github.com/goraidebjyoti/UnitConverterApp" target="_blank">GitHub Repository ↗</a>
                 </p>
             </div>
 
-            <div class="project-item">
-            <h3>
-                Student Attendance System App (Online Internship)
-                </h3>
+            <div class="project-item card reveal">
+                <h3>Student Attendance System App (Online Internship)</h3>
                 <p>
                     Developed a mobile application using Android Studio to manage student
                     attendance digitally, reducing manual record-keeping and improving
-                    administrative efficiency. This project was completed during an online
-                    internship in my undergraduate years.
+                    administrative efficiency. Completed during an online internship in
+                    my undergraduate years.
                 </p>
             </div>
-    
-            <div class="project-item">
-                <h3>
-                    Computer Vision–Based Automated Bank Cheque Verification System
-                    <span class="project-duration">(B.Tech Final Year Project)</span>
-                </h3>
+
+            <div class="project-item card reveal">
+                <h3>Computer Vision-Based Bank Cheque Verification</h3>
                 <p>
-                    Designed and implemented a computer vision–based system to automatically
+                    Designed and implemented a computer vision-based system to automatically
                     verify bank cheques by detecting and validating required fields using
-                    image processing and machine learning techniques as part of my undergraduate
-                    capstone project.
+                    image processing and machine learning techniques. Completed during an
+                    online internship in my undergraduate years.
                 </p>
             </div>
-    
-            <div class="project-item">
+
+            <div class="project-item card reveal">
                 <h3>Personal Website</h3>
                 <p>
                     A responsive personal website designed and developed using HTML and CSS,
@@ -192,9 +221,57 @@
                 </p>
                 <p class="project-links">
                     <a href="https://github.com/goraidebjyoti/Website" target="_blank">
-                        GitHub Repository
+                        GitHub Repository ↗
                     </a>
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="technical-skills">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <hr class="section-rule">
+            <div class="skills-legend reveal">
+                <span class="legend-item"><span class="legend-dot legend-strong"></span>Proficient</span>
+                <span class="legend-item"><span class="legend-dot legend-familiar"></span>Familiar</span>
+            </div>
+            <div class="skills-category reveal">
+                <h3>General</h3>
+                <ul>
+                    <li>Natural Language Processing</li>
+                    <li>Information Retrieval</li>
+                    <li>LLM Prompt Engineering</li>
+                    <li>Neural Ranking</li>
+                    <li>Bash Shell (Linux)</li>
+                    <li>Web Development</li>
+                    <li class="skill-familiar">Computer Vision</li>
+                    <li class="skill-familiar">Android App Dev</li>
+                    <li class="skill-familiar">Network Programming</li>
+                </ul>
+            </div>
+            <div class="skills-category reveal">
+                <h3>Languages</h3>
+                <ul>
+                    <li>Python</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>SQL</li>
+                    <li class="skill-familiar">Java</li>
+                    <li class="skill-familiar">C/C++</li>
+                    <li class="skill-familiar">JavaScript</li>
+                </ul>
+            </div>
+            <div class="skills-category reveal">
+                <h3>Tools &amp; Platforms</h3>
+                <ul>
+                    <li>GitHub</li>
+                    <li>VS Code</li>
+                    <li>Jupyter Notebooks</li>
+                    <li>Linux / Windows</li>
+                    <li class="skill-familiar">Android Studio</li>
+                    <li class="skill-familiar">MS Azure</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -202,111 +279,73 @@
     <section id="certifications" class="certifications-section">
         <div class="container">
             <h2>Certifications</h2>
-            <ul>
-                <li>Build Your First Android App (Project-Centered Course) - COURSERA</li>
-                <li>Introduction to Cybersecurity Tools & Cyber Attacks - COURSERA & IBM</li>
-                <li>Android Applications Development - ARDENT</li>
-                <li>Python with Machine Learning - EUPHORIA</li>
-                <li>AWS Fundamentals: Building Serverless Applications - COURSERA</li>
+            <hr class="section-rule">
+            <ul class="reveal">
+                <li>Build Your First Android App (Project-Centered Course) &mdash; Coursera</li>
+                <li>Introduction to Cybersecurity Tools &amp; Cyber Attacks &mdash; Coursera &amp; IBM</li>
+                <li>Android Applications Development &mdash; Ardent</li>
+                <li>Python with Machine Learning &mdash; Euphoria</li>
+                <li>AWS Fundamentals: Building Serverless Applications &mdash; Coursera</li>
             </ul>
-        </div>
-    </section>
-
-    <section id="skills" class="technical-skills">
-        <div class="container">
-            <h2>Technical Skills</h2>
-            <div class="skills-category">
-                <h3>General</h3>
-                <ul>
-                    <li>Problem Solving</li>
-                    <li>Android Application Development</li>
-                    <li>Network Programming</li>
-                    <li>Website Designing and Development</li>
-                    <li>Bash Shell Programming (Linux)</li>
-                    <li>Computer Vision (Lib: OpenCV, Framework: TensorFlow, Caffe, Keras)</li>
-                    <li>Natural Language Processing</li>
-                    <li>Information Retrieval</li>
-                    <li>LLM Prompt Engineering</li>
-                </ul>
-            </div>
-            <div class="skills-category">
-                <h3>Languages</h3>
-                <ul>
-                    <li>C/C++</li>
-                    <li>Java</li>
-                    <li>Python</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>SQL</li>
-                    <li>JavaScript</li>
-                </ul>
-            </div>
-            <div class="skills-category">
-                <h3>IDE</h3>
-                <ul>
-                    <li>Android Studio</li>
-                    <li>Visual Studio Code</li>
-                    <li>Visual Studio Community</li>
-                    <li>Adobe Dreamweaver</li>
-                    <li>Eclipse</li>
-                </ul>
-            </div>
-            <div class="skills-category">
-                <h3>OS</h3>
-                <ul>
-                    <li>Windows and Linux (Ubuntu and Fedora)</li>
-                </ul>
-            </div>
-             <div class="skills-category">
-                <h3>Others</h3>
-                <ul>
-                    <li>GitHub</li>
-                    <li>Cloudflare</li>
-                    <li>MS Azure</li>
-                    <li>Jupyter Notebooks</li>
-                    <li>SDLC</li>
-                </ul>
-            </div>
         </div>
     </section>
 
     <section id="education" class="education-section">
         <div class="container">
             <h2>Education</h2>
-            <div class="education-item">
+            <hr class="section-rule">
+            <div class="education-item card reveal">
                 <h3>Narula Institute of Technology</h3>
-                <p class="degree">Bachelor in Computer Science and Engineering (B. Tech)</p>
-                <p class="date">July 2019 - June 2023</p>
+                <p class="degree">Bachelor in Computer Science and Engineering (B.Tech)</p>
+                <p class="date">July 2019 &ndash; June 2023</p>
                 <p>CGPA: 8.83</p>
             </div>
-            <div class="education-item">
-                <h3>Kendriya Vidyalaya No. 1, IIT Kharagpur (Class XII)</h3>
-                <p class="date">April 2018 - April 2019</p>
-                <p>Marks Percentage: 76.5% (CBSE-Science with Computer Science)</p>
+            <div class="education-item card reveal">
+                <h3>Kendriya Vidyalaya No. 1, IIT Kharagpur</h3>
+                <p class="date">April 2018 &ndash; April 2019</p>
+                <p>76.5% &mdash; CBSE, Science with Computer Science</p>
             </div>
         </div>
     </section>
 
     <footer class="contact-footer">
         <div class="container">
-            <h2>Contact Me</h2>
-            <p>Feel free to reach out!</p>
-            <div class="contact-info">
-                 <a href="mailto:debjyotigorai@outlook.com">debjyotigorai@outlook.com</a>
-                <span class="separator">|</span>
+            <h2 class="footer-logo">DG</h2>
+            <div class="footer-links">
+                <a href="mailto:debjyotigorai@outlook.com">Email</a>
                 <a href="https://linkedin.com/in/debjyoti-gorai-515956236/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/goraidebjyoti" target="_blank">GitHub</a>
             </div>
             <p class="copyright">&copy; 2026 Debjyoti Gorai. All rights reserved.</p>
         </div>
     </footer>
 
+    <script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(a => a.classList.remove('active'));
+                const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, { threshold: 0.25 });
+    sections.forEach(s => navObserver.observe(s));
+
+    // Scroll-reveal for .reveal elements
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
