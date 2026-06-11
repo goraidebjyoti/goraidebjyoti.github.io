@@ -6,49 +6,38 @@
 html { scroll-behavior: smooth; }
 
 :root {
-    /* ── Ground colours ─────────────────────────────────────── */
-    --bg-base:      #C8C0B4;   /* deepest stone — visible behind glass */
-    --bg-mid:       #D4CCC0;   /* mid-ground     */
-    --bg-light:     #DDD7CE;   /* lighter surface */
-
-    /* ── Accent spots (warm amber-rose) ─────────────────────── */
+    --bg-base:      #C8C0B4;
     --spot-amber:   #E2B48A;
     --spot-rose:    #D4937A;
-    --spot-sage:    #A8B09C;   /* muted green-grey cooldown */
+    --spot-sage:    #A8B09C;
 
-    /* ── Text ────────────────────────────────────────────────── */
     --text-primary:   #1E1B18;
     --text-secondary: #5C5650;
     --text-muted:     #9A948E;
 
-    /* ── Accent pill (under-review badge) ───────────────────── */
-    --pill-bg:   rgba(226, 180, 138, 0.38);
+    --pill-bg:     rgba(226, 180, 138, 0.38);
     --pill-border: rgba(226, 180, 138, 0.65);
-    --pill-text: #6E4020;
+    --pill-text:   #6E4020;
 
-    /* ── Glass tokens ────────────────────────────────────────── */
     --glass-fill:       rgba(255, 252, 248, 0.46);
     --glass-fill-hover: rgba(255, 252, 248, 0.66);
     --glass-fill-nav:   rgba(255, 252, 248, 0.52);
-    --glass-edge-top:   rgba(255, 255, 255, 0.82);   /* bright rim  */
-    --glass-edge:       rgba(255, 255, 255, 0.36);   /* side/bottom */
-    --glass-inset:      rgba(255, 255, 255, 0.72);   /* inner wash  */
+    --glass-edge-top:   rgba(255, 255, 255, 0.82);
+    --glass-edge:       rgba(255, 255, 255, 0.36);
+    --glass-inset:      rgba(255, 255, 255, 0.72);
     --glass-shadow:     0 6px 28px rgba(30,27,24,0.13), 0 1px 4px rgba(30,27,24,0.07);
     --glass-shadow-h:   0 16px 44px rgba(30,27,24,0.17), 0 3px 10px rgba(30,27,24,0.09);
     --blur-card:   blur(20px) saturate(1.5);
     --blur-nav:    blur(30px) saturate(1.6);
 
-    /* ── Typography ──────────────────────────────────────────── */
     --font-heading: 'Lora', serif;
     --font-body:    'Inter', sans-serif;
     --font-mono:    'Space Mono', monospace;
 
-    /* ── Misc ────────────────────────────────────────────────── */
     --radius-card: 18px;
     --radius-pill: 32px;
 }
 
-/* ── Reset / Base ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -62,22 +51,22 @@ body {
     flex-direction: column;
     min-height: 100vh;
 
-    /*
-     * Four overlapping colour spots — stone base with amber top-left,
-     * rose bottom-right, sage mid-right. Glass panels blur over this,
-     * producing a visible warm-frost effect.
-     */
     background-color: var(--bg-base);
     background-image:
-        radial-gradient(ellipse 75% 55% at  8%  6%,  #E8C4A0 0%, transparent 52%),
+        /*
+         * FIX 2 — Seam fix: the amber spot now stretches much further down
+         * (was 52%, now 75%) so it bleeds warmly into the About Me section.
+         * The mid-page sage spot is replaced with a warm amber-stone so the
+         * temperature stays consistent across the fold.
+         */
+        radial-gradient(ellipse 90% 75% at  8%  4%,  #E8C4A0 0%, transparent 65%),
         radial-gradient(ellipse 60% 50% at 90% 18%,  #C4B4A8 0%, transparent 48%),
-        radial-gradient(ellipse 70% 48% at 55% 62%,  #B8C0B0 0%, transparent 50%),
+        radial-gradient(ellipse 80% 55% at 50% 55%,  #D4BEA8 0%, transparent 52%),
         radial-gradient(ellipse 60% 44% at 18% 88%,  #D4A882 0%, transparent 48%),
         radial-gradient(ellipse 50% 40% at 88% 82%,  #C8B89C 0%, transparent 45%);
     background-attachment: fixed;
 }
 
-/* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3 {
     font-family: var(--font-heading);
     font-weight: 400;
@@ -85,7 +74,6 @@ h1, h2, h3 {
     margin-top: 0;
 }
 
-/* ── Layout ───────────────────────────────────────────────── */
 .container {
     width: 90%;
     max-width: 960px;
@@ -93,13 +81,11 @@ h1, h2, h3 {
     padding: 20px;
 }
 
-/* ── Animations ───────────────────────────────────────────── */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Scroll-reveal — JS adds .is-visible */
 .reveal {
     opacity: 0;
     transform: translateY(22px);
@@ -111,7 +97,7 @@ h1, h2, h3 {
 }
 
 /* ============================================================
-   NAVIGATION — frosted bar
+   NAVIGATION
    ============================================================ */
 .site-nav {
     position: sticky;
@@ -135,6 +121,7 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .nav-logo {
@@ -143,8 +130,10 @@ h1, h2, h3 {
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 0.02em;
+    flex-shrink: 0;
 }
 
+/* Desktop nav links */
 .nav-links {
     list-style: none;
     margin: 0; padding: 0;
@@ -162,12 +151,82 @@ h1, h2, h3 {
     transition: color 0.2s;
     padding-bottom: 2px;
 }
-
-.nav-links a:hover { color: var(--text-primary); }
-
-.nav-links a.active {
+.nav-links a:hover   { color: var(--text-primary); }
+.nav-links a.active  {
     color: var(--text-primary);
     border-bottom: 1px solid var(--text-primary);
+}
+
+/* ── Hamburger button (hidden on desktop) ── */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animate to X when open */
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile drawer ── */
+.nav-drawer {
+    display: none; /* shown via JS toggle */
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: rgba(255, 252, 248, 0.93);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
+    border-bottom: 1px solid var(--glass-edge);
+    box-shadow: 0 8px 24px rgba(30,27,24,0.12);
+    padding: 12px 0 16px;
+    z-index: 99;
+}
+
+.nav-drawer.is-open { display: block; }
+
+.nav-drawer ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-drawer ul li a {
+    display: block;
+    padding: 11px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+}
+
+.nav-drawer ul li a:hover,
+.nav-drawer ul li a.active {
+    color: var(--text-primary);
+    background: rgba(255,252,248,0.5);
 }
 
 /* ============================================================
@@ -178,27 +237,24 @@ h1, h2, h3 {
     padding: 80px 0 52px;
     text-align: center;
     overflow: hidden;
-    border-bottom: 1px solid rgba(255,255,255,0.22);
 }
 
 .hero-bg-glow {
     position: absolute;
     inset: -20% -10%;
     background:
-        radial-gradient(circle at 50%  0%, rgba(232,196,160,0.60) 0%, transparent 55%),
+        radial-gradient(circle at 50%  0%, rgba(232,196,160,0.65) 0%, transparent 60%),
         radial-gradient(circle at 15% 95%, rgba(212,147,122,0.35) 0%, transparent 48%),
         radial-gradient(circle at 88% 75%, rgba(168,176,156,0.28) 0%, transparent 42%);
     filter: blur(52px);
     z-index: -1;
 }
 
-/* Monogram ring — signature element */
 .hero-monogram {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
+    width: 72px; height: 72px;
     border-radius: 50%;
     background: var(--glass-fill);
     backdrop-filter: var(--blur-card);
@@ -236,17 +292,24 @@ h1, h2, h3 {
     animation: fadeUp 0.8s ease-out 0.30s forwards;
 }
 
+/* FIX 4 — Contact info: flex row on desktop, column on mobile */
 .hero .contact-info {
     font-family: var(--font-mono);
     font-size: 0.88em;
     opacity: 0;
     animation: fadeUp 0.8s ease-out 0.45s forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0;
 }
 
 .hero .contact-info a {
     color: var(--text-primary);
     text-decoration: none;
     transition: opacity 0.2s;
+    white-space: nowrap;
 }
 .hero .contact-info a:hover { opacity: 0.55; }
 
@@ -256,12 +319,9 @@ h1, h2, h3 {
    SECTIONS
    ============================================================ */
 section {
-    padding: 52px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.20);
+    padding: 40px 0;
 }
-section:last-of-type { border-bottom: none; }
 
-/* Section headings with thin accent rule — the signature detail */
 section h2 {
     font-size: 2.1em;
     text-align: center;
@@ -309,12 +369,8 @@ section h2 {
     border-top-color: rgba(255,255,255,0.92);
 }
 
-.card h3 {
-    font-size: 1.28em;
-    margin-bottom: 6px;
-    line-height: 1.35;
-}
-.card p { color: var(--text-secondary); margin-bottom: 8px; }
+.card h3 { font-size: 1.28em; margin-bottom: 6px; line-height: 1.35; }
+.card p  { color: var(--text-secondary); margin-bottom: 8px; }
 .card strong { color: var(--text-primary); font-weight: 500; }
 
 .organization, .degree, .date {
@@ -325,11 +381,7 @@ section h2 {
     margin-bottom: 10px;
 }
 
-.exp-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 12px 0 0;
-}
+.exp-bullets { list-style: none; padding: 0; margin: 12px 0 0; }
 
 .exp-bullets li {
     position: relative;
@@ -411,13 +463,14 @@ section h2 {
     padding-bottom: 2px;
     transition: border-color 0.2s, opacity 0.2s;
 }
-.project-links a:hover {
-    border-color: var(--text-primary);
-    opacity: 0.75;
-}
+.project-links a:hover { border-color: var(--text-primary); opacity: 0.75; }
 
 /* ============================================================
    SKILLS
+   FIX 3 — backdrop-filter removed from individual pills.
+   Each pill gets a plain semi-opaque fill instead.
+   The parent card already composites the blur; re-blurring
+   20+ children per scroll frame was causing the lag.
    ============================================================ */
 .skills-legend {
     display: flex;
@@ -441,8 +494,8 @@ section h2 {
     display: inline-block;
     flex-shrink: 0;
 }
-.legend-strong  { background: var(--text-primary); }
-.legend-familiar{ background: rgba(94,88,80,0.35); }
+.legend-strong   { background: var(--text-primary); }
+.legend-familiar { background: rgba(94,88,80,0.35); }
 
 .skills-category { margin-bottom: 28px; }
 
@@ -455,7 +508,6 @@ section h2 {
     margin-bottom: 13px;
 }
 
-/* Glass skill pills */
 .skills-category ul {
     list-style: none;
     padding: 0;
@@ -464,51 +516,45 @@ section h2 {
     gap: 9px;
 }
 
+/* Solid fill — no backdrop-filter on pills */
 .skills-category ul li {
-    background: rgba(255, 252, 248, 0.44);
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    background: rgba(255, 252, 248, 0.62);
     color: var(--text-primary);
-    border: 1px solid var(--glass-edge);
-    border-top-color: var(--glass-edge-top);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-top-color: rgba(255,255,255,0.85);
     padding: 6px 15px;
     border-radius: var(--radius-pill);
     font-family: var(--font-mono);
     font-size: 0.83em;
-    box-shadow: 0 2px 10px rgba(30,27,24,0.08), 0 1px 0 var(--glass-inset) inset;
-    transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+    box-shadow: 0 2px 8px rgba(30,27,24,0.07), 0 1px 0 rgba(255,255,255,0.80) inset;
+    transition: background 0.18s ease, transform 0.18s ease;
     cursor: default;
 }
 
 .skills-category ul li:hover {
-    background: rgba(255, 252, 248, 0.70);
+    background: rgba(255, 252, 248, 0.82);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(30,27,24,0.12), 0 1px 0 rgba(255,255,255,0.85) inset;
 }
 
 .skills-category ul li.skill-familiar {
     color: var(--text-muted);
-    background: rgba(255, 252, 248, 0.24);
-    border-color: rgba(255,255,255,0.24);
-    border-top-color: rgba(255,255,255,0.44);
+    background: rgba(255, 252, 248, 0.30);
+    border-color: rgba(255,255,255,0.30);
+    border-top-color: rgba(255,255,255,0.50);
     box-shadow: none;
 }
 
 .skills-category ul li.skill-familiar:hover {
-    background: rgba(255, 252, 248, 0.46);
+    background: rgba(255, 252, 248, 0.50);
     color: var(--text-secondary);
-    box-shadow: 0 4px 14px rgba(30,27,24,0.08), 0 1px 0 rgba(255,255,255,0.7) inset;
 }
 
 /* ============================================================
-   CERTIFICATIONS — glass pill list
+   CERTIFICATIONS
    ============================================================ */
 .certifications-section ul {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
 }
 
 .certifications-section ul li {
@@ -519,16 +565,11 @@ section h2 {
     color: var(--text-primary);
     transition: color 0.2s, padding-left 0.2s;
 }
-
-.certifications-section ul li:hover {
-    color: var(--text-primary);
-    padding-left: 6px;
-}
-
+.certifications-section ul li:hover { padding-left: 6px; }
 .certifications-section ul li:last-child { border-bottom: none; }
 
 /* ============================================================
-   FOOTER — closing glass panel
+   FOOTER
    ============================================================ */
 .contact-footer {
     background: rgba(255, 252, 248, 0.44);
@@ -561,47 +602,51 @@ section h2 {
     gap: 28px;
 }
 
-.footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s;
-}
+.footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--text-primary); }
 
-.copyright {
-    font-family: var(--font-mono);
-    font-size: 0.73em;
-    color: var(--text-muted);
-}
+.copyright { font-family: var(--font-mono); font-size: 0.73em; color: var(--text-muted); }
 
-.email-at {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0;
+.email-at { font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0; }
+
+/* ============================================================
+   RESPONSIVE — 768px
+   ============================================================ */
+@media (max-width: 768px) {
+    section h2   { font-size: 1.85em; }
+    .container   { width: 95%; padding: 20px 14px; }
+    .card        { padding: 18px 20px; }
+    .footer-links { flex-direction: column; gap: 12px; }
+
+    /* FIX 1 — Show hamburger, hide inline nav links */
+    .nav-links     { display: none; }
+    .nav-hamburger { display: flex; }
+
+    /* FIX 4 — Contact info: stack vertically, hide separators */
+    .hero .contact-info {
+        flex-direction: column;
+        gap: 6px;
+        font-size: 0.82em;
+    }
+    .hero .contact-info .separator { display: none; }
+
+    .hero h1         { font-size: 2.8em; }
+    .hero-monogram   { width: 62px; height: 62px; font-size: 1.35em; }
+    .hero            { padding: 60px 0 40px; }
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — 480px
    ============================================================ */
-@media (max-width: 768px) {
-    .hero h1         { font-size: 2.8em; }
-    .hero-monogram   { width: 60px; height: 60px; font-size: 1.3em; }
-    section h2       { font-size: 1.85em; }
-    .container       { width: 95%; padding: 20px 12px; }
-    .card            { padding: 18px 20px; }
-    .footer-links    { flex-direction: column; gap: 12px; }
-    .nav-links       { gap: 16px; }
-    .nav-links a     { font-size: 0.64em; }
-}
-
 @media (max-width: 480px) {
-    .hero h1         { font-size: 2.1em; }
-    .hero-monogram   { width: 52px; height: 52px; font-size: 1.15em; }
-    .nav-links       { gap: 10px; }
-    .nav-links a     { font-size: 0.60em; letter-spacing: 0.04em; }
-    .footer-logo     { font-size: 2.2em; }
+    .hero h1       { font-size: 2.1em; }
+    .hero-monogram { width: 54px; height: 54px; font-size: 1.18em; }
+    .footer-logo   { font-size: 2.2em; }
 }
 
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
     .reveal, .card, .skills-category ul li,
     .certifications-section ul li { transition: none; }
