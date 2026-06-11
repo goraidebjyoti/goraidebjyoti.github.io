@@ -187,11 +187,13 @@ h1, h2, h3 {
     position: absolute;
     top: 100%;
     left: 0; right: 0;
-    background: rgba(255, 252, 248, 0.93);
-    backdrop-filter: blur(24px) saturate(1.6);
-    -webkit-backdrop-filter: blur(24px) saturate(1.6);
-    border-bottom: 1px solid var(--glass-edge);
-    box-shadow: 0 8px 24px rgba(30,27,24,0.12);
+    background: rgba(210, 200, 188, 0.96);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border: 1px solid var(--glass-edge);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 10px 28px rgba(30,27,24,0.15);
     padding: 12px 0 16px;
     z-index: 99;
 }
@@ -220,7 +222,7 @@ h1, h2, h3 {
 .nav-drawer ul li a:hover,
 .nav-drawer ul li a.active {
     color: var(--text-primary);
-    background: rgba(255,252,248,0.5);
+    background: rgba(255,252,248,0.18);
 }
 
 /* ============================================================
