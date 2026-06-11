@@ -238,17 +238,6 @@ h1, h2, h3 {
     overflow: hidden;
 }
 
-.hero-bg-glow {
-    position: absolute;
-    inset: -20% -10%;
-    background:
-        radial-gradient(circle at 50%  0%, rgba(232,196,160,0.65) 0%, transparent 60%),
-        radial-gradient(circle at 15% 95%, rgba(212,147,122,0.35) 0%, transparent 48%),
-        radial-gradient(circle at 88% 75%, rgba(168,176,156,0.28) 0%, transparent 42%);
-    filter: blur(52px);
-    z-index: -1;
-}
-
 .hero-monogram {
     display: inline-flex;
     align-items: center;
