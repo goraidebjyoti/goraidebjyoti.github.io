@@ -53,12 +53,6 @@ body {
 
     background-color: var(--bg-base);
     background-image:
-        /*
-         * FIX 2 — Seam fix: the amber spot now stretches much further down
-         * (was 52%, now 75%) so it bleeds warmly into the About Me section.
-         * The mid-page sage spot is replaced with a warm amber-stone so the
-         * temperature stays consistent across the fold.
-         */
         radial-gradient(ellipse 90% 75% at  8%  4%,  #E8C4A0 0%, transparent 65%),
         radial-gradient(ellipse 60% 50% at 90% 18%,  #C4B4A8 0%, transparent 48%),
         radial-gradient(ellipse 80% 55% at 50% 55%,  #D4BEA8 0%, transparent 52%),
@@ -467,10 +461,6 @@ section h2 {
 
 /* ============================================================
    SKILLS
-   FIX 3 — backdrop-filter removed from individual pills.
-   Each pill gets a plain semi-opaque fill instead.
-   The parent card already composites the blur; re-blurring
-   20+ children per scroll frame was causing the lag.
    ============================================================ */
 .skills-legend {
     display: flex;
