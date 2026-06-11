@@ -9,19 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="icon"
-      href="data:image/svg+xml,
-      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-        <circle cx='50' cy='50' r='48' fill='%23111'/>
-        <text x='50' y='63' font-size='38' font-weight='600'
-              text-anchor='middle' fill='white'
-              font-family='Inter,Arial,sans-serif'>DG</text>
-      </svg>">
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23111'/><text x='50' y='63' font-size='38' font-weight='600' text-anchor='middle' fill='white' font-family='Inter,Arial,sans-serif'>DG</text></svg>">
 </head>
 <body>
 
     <nav class="site-nav">
         <div class="nav-container">
             <span class="nav-logo">DG</span>
+
+            <!-- Desktop links -->
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -30,6 +26,23 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#education">Education</a></li>
             </ul>
+
+            <!-- Mobile hamburger -->
+            <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <!-- Mobile drawer -->
+            <div class="nav-drawer" id="nav-drawer">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -126,9 +139,7 @@
                     Structured answers to ten clinically motivated questions are used as features for a
                     lightweight neural re-ranker, improving both effectiveness and transparency.
                 </p>
-                <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/NEUREQ" target="_blank">GitHub Repository ↗</a>
-                </p>
+                <p class="project-links"><a href="https://github.com/goraidebjyoti/NEUREQ" target="_blank">GitHub Repository ↗</a></p>
             </div>
 
             <div class="project-item card reveal">
@@ -139,9 +150,7 @@
                     The model is trained using a hybrid classification and ranking objective and serves
                     as a strong neural baseline for TREC-style clinical trial re-ranking experiments.
                 </p>
-                <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/TCH_CLF" target="_blank">GitHub Repository ↗</a>
-                </p>
+                <p class="project-links"><a href="https://github.com/goraidebjyoti/TCH_CLF" target="_blank">GitHub Repository ↗</a></p>
             </div>
 
             <div class="project-item card reveal">
@@ -152,11 +161,7 @@
                     Streamlit-based user interface. The system supports explainable eligibility scoring,
                     batch evaluation, and audit logging for reproducible research workflows.
                 </p>
-                <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/ClinicalTrialEligibilityChecker" target="_blank">
-                        GitHub Repository ↗
-                    </a>
-                </p>
+                <p class="project-links"><a href="https://github.com/goraidebjyoti/ClinicalTrialEligibilityChecker" target="_blank">GitHub Repository ↗</a></p>
             </div>
 
             <h3 class="projects-subtitle">Other Projects</h3>
@@ -173,24 +178,14 @@
 
             <div class="project-item card reveal">
                 <h3>Stock Price Prediction using Machine Learning</h3>
-                <p>
-                    Predicted NETFLIX stock prices using Linear Regression, KNN, and SVM,
-                    with comparative evaluation using K-Fold cross-validation.
-                </p>
-                <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/Stock-Price-Prediction" target="_blank">GitHub Repository ↗</a>
-                </p>
+                <p>Predicted NETFLIX stock prices using Linear Regression, KNN, and SVM, with comparative evaluation using K-Fold cross-validation.</p>
+                <p class="project-links"><a href="https://github.com/goraidebjyoti/Stock-Price-Prediction" target="_blank">GitHub Repository ↗</a></p>
             </div>
 
             <div class="project-item card reveal">
                 <h3>Unit Converter Android App</h3>
-                <p>
-                    An Android application for converting values across different measurement units,
-                    built using Android Studio.
-                </p>
-                <p class="project-links">
-                    <a href="https://github.com/goraidebjyoti/UnitConverterApp" target="_blank">GitHub Repository ↗</a>
-                </p>
+                <p>An Android application for converting values across different measurement units, built using Android Studio.</p>
+                <p class="project-links"><a href="https://github.com/goraidebjyoti/UnitConverterApp" target="_blank">GitHub Repository ↗</a></p>
             </div>
 
             <div class="project-item card reveal">
@@ -321,21 +316,41 @@
     </footer>
 
     <script>
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    // ── Hamburger menu ──────────────────────────────────────────
+    const hamburger = document.querySelector('.nav-hamburger');
+    const drawer    = document.getElementById('nav-drawer');
+
+    hamburger.addEventListener('click', () => {
+        const isOpen = drawer.classList.toggle('is-open');
+        hamburger.classList.toggle('is-open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close drawer when any drawer link is tapped
+    drawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            drawer.classList.remove('is-open');
+            hamburger.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', false);
+        });
+    });
+
+    // ── Active nav (desktop links + drawer links) ────────────────
+    const sections  = document.querySelectorAll('section[id]');
+    const allLinks  = document.querySelectorAll('.nav-links a, .nav-drawer a');
+
     const navObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                navLinks.forEach(a => a.classList.remove('active'));
-                const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-                if (active) active.classList.add('active');
+                allLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`)
+                    .forEach(a => a.classList.add('active'));
             }
         });
     }, { threshold: 0.25 });
     sections.forEach(s => navObserver.observe(s));
 
-    // Scroll-reveal for .reveal elements
+    // ── Scroll-reveal ────────────────────────────────────────────
     const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
