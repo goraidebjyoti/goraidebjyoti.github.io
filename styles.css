@@ -133,6 +133,7 @@ h1, h2, h3 {
     margin: 0; padding: 0;
     display: flex;
     gap: 26px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -149,6 +150,19 @@ h1, h2, h3 {
 .nav-links a.active  {
     color: var(--text-primary);
     border-bottom: 1px solid var(--text-primary);
+}
+
+.nav-hire-link {
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    color: var(--pill-text) !important;
+    padding: 7px 16px;
+    border-radius: 999px;
+    transition: background 0.2s, border-color 0.2s;
+}
+.nav-hire-link:hover {
+    background: rgba(226, 180, 138, 0.55);
+    border-color: rgba(226, 180, 138, 0.85);
 }
 
 /* ── Hamburger button (hidden on desktop) ── */
@@ -228,6 +242,14 @@ h1, h2, h3 {
     background: rgba(255,252,248,0.18);
 }
 
+.nav-drawer .nav-hire-link {
+    color: var(--pill-text) !important;
+    background: rgba(226, 180, 138, 0.30);
+    margin: 4px 16px 0;
+    border-radius: 999px;
+    text-align: center;
+}
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -236,7 +258,6 @@ h1, h2, h3 {
     padding: 40px 0 80px;
     text-align: center;
     overflow: hidden;
-    /* Warm amber at top, dissolves to transparent — body gradient shows through at bottom */
     background: linear-gradient(
         to bottom,
         #E8A870 0%,
@@ -289,7 +310,6 @@ h1, h2, h3 {
     animation: fadeUp 0.8s ease-out 0.30s forwards;
 }
 
-/* FIX 4 — Contact info: flex row on desktop, column on mobile */
 .hero .contact-info {
     font-family: var(--font-mono);
     font-size: 0.88em;
@@ -617,11 +637,9 @@ section h2 {
     .card        { padding: 18px 20px; }
     .footer-links { flex-direction: column; gap: 12px; }
 
-    /* FIX 1 — Show hamburger, hide inline nav links */
     .nav-links     { display: none; }
     .nav-hamburger { display: flex; }
 
-    /* FIX 4 — Contact info: stack vertically, hide separators */
     .hero .contact-info {
         flex-direction: column;
         gap: 6px;
@@ -629,7 +647,6 @@ section h2 {
     }
     .hero .contact-info .separator { display: none; }
 
-    /* Tighten subtitle spacing so it fits on one line */
     .hero .subtitle {
         letter-spacing: 0.04em;
         font-size: 0.76em;
