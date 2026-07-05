@@ -1,15 +1,15 @@
 /* ============================================================
    styles.css  —  Debjyoti Gorai Portfolio
-   Palette: sage-stone ground · amber-rose accents · warm glass
+   Palette: sage-stone ground · six-colour accent system (amber,
+   rose, teal, plum, coral, sage) shared with the hire page, so
+   both sites read as one family. Each section carries one accent
+   as its own identity colour (rule, card border, small details).
    ============================================================ */
 
 html { scroll-behavior: smooth; }
 
 :root {
     --bg-base:      #C8C0B4;
-    --spot-amber:   #E2B48A;
-    --spot-rose:    #D4937A;
-    --spot-sage:    #A8B09C;
 
     --text-primary:   #1E1B18;
     --text-secondary: #5C5650;
@@ -36,6 +36,58 @@ html { scroll-behavior: smooth; }
 
     --radius-card: 18px;
     --radius-pill: 32px;
+
+    /* ---- six-colour accent system, shared with the hire page ---- */
+    --acc-amber: #E2B48A;
+    --acc-rose:  #D4937A;
+    --acc-teal:  #5B9791;
+    --acc-plum:  #9B6B94;
+    --acc-coral: #DE7458;
+    --acc-sage:  #8FA083;
+
+    --acc-amber-soft: rgba(226, 180, 138, 0.30);
+    --acc-rose-soft:  rgba(212, 147, 122, 0.28);
+    --acc-teal-soft:  rgba(91, 151, 145, 0.24);
+    --acc-plum-soft:  rgba(155, 107, 148, 0.24);
+    --acc-coral-soft: rgba(222, 116, 88, 0.26);
+    --acc-sage-soft:  rgba(143, 160, 131, 0.26);
+
+    --drawer-bg: rgb(210, 200, 188);
+}
+
+/* ============================================================
+   DARK MODE — same tokens, re-tuned for a dark surface. Accent
+   hues stay identical (brand consistency); neutrals, glass
+   alphas, and a couple of hardcoded-contrast text colours shift.
+   ============================================================ */
+[data-theme="dark"] {
+    --bg-base: #1C1916;
+
+    --text-primary:   #F2ECE2;
+    --text-secondary: #B9B0A4;
+    --text-muted:     #7C766D;
+
+    --pill-bg:     rgba(226, 180, 138, 0.22);
+    --pill-border: rgba(226, 180, 138, 0.55);
+    --pill-text:   #F5CC9E;
+
+    --glass-fill:       rgba(42, 37, 33, 0.55);
+    --glass-fill-hover: rgba(52, 46, 41, 0.72);
+    --glass-fill-nav:   rgba(24, 21, 19, 0.62);
+    --glass-edge-top:   rgba(255, 255, 255, 0.10);
+    --glass-edge:       rgba(255, 255, 255, 0.08);
+    --glass-inset:      rgba(255, 255, 255, 0.05);
+    --glass-shadow:     0 6px 28px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.30);
+    --glass-shadow-h:   0 16px 44px rgba(0,0,0,0.55), 0 3px 10px rgba(0,0,0,0.35);
+
+    --acc-amber-soft: rgba(226, 180, 138, 0.22);
+    --acc-rose-soft:  rgba(212, 147, 122, 0.20);
+    --acc-teal-soft:  rgba(91, 151, 145, 0.24);
+    --acc-plum-soft:  rgba(155, 107, 148, 0.24);
+    --acc-coral-soft: rgba(222, 116, 88, 0.24);
+    --acc-sage-soft:  rgba(143, 160, 131, 0.22);
+
+    --drawer-bg: #241F1B;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -59,6 +111,16 @@ body {
         radial-gradient(ellipse 55% 38% at 15% 88%,  #D4A882 0%, transparent 48%),
         radial-gradient(ellipse 48% 35% at 88% 84%,  #C4B89A 0%, transparent 45%);
     background-attachment: fixed;
+    transition: background-color 0.4s ease;
+}
+
+[data-theme="dark"] body {
+    background-image:
+        radial-gradient(ellipse 70% 50% at  8%  8%,  rgba(224, 196, 160, 0.16) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 40% at 92% 15%,  rgba(200, 184, 168, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 75% 45% at 50% 52%,  rgba(208, 190, 164, 0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 38% at 15% 88%,  rgba(212, 168, 130, 0.14) 0%, transparent 48%),
+        radial-gradient(ellipse 48% 35% at 88% 84%,  rgba(196, 184, 154, 0.12) 0%, transparent 45%);
 }
 
 h1, h2, h3 {
@@ -104,6 +166,7 @@ h1, h2, h3 {
     box-shadow:
         0 1px 0 var(--glass-edge-top) inset,
         0 4px 20px rgba(30,27,24,0.10);
+    transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .nav-container {
@@ -137,6 +200,7 @@ h1, h2, h3 {
 }
 
 .nav-links a {
+    position: relative;
     font-family: var(--font-mono);
     font-size: 0.70em;
     text-transform: uppercase;
@@ -144,13 +208,35 @@ h1, h2, h3 {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s;
-    padding-bottom: 2px;
+    padding-bottom: 6px;
 }
-.nav-links a:hover   { color: var(--text-primary); }
-.nav-links a.active  {
-    color: var(--text-primary);
-    border-bottom: 1px solid var(--text-primary);
+.nav-links a:hover { color: var(--text-primary); }
+
+/* ── Selected / hovered indicator line, colour-matched per
+   section so each link keeps its section's accent identity ── */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--acc-amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
 }
+.nav-links li:nth-child(1) a::after { background: var(--acc-sage);  } /* About */
+.nav-links li:nth-child(2) a::after { background: var(--acc-amber); } /* Experience */
+.nav-links li:nth-child(3) a::after { background: var(--acc-coral); } /* Publications */
+.nav-links li:nth-child(4) a::after { background: var(--acc-teal);  } /* Projects */
+.nav-links li:nth-child(5) a::after { background: var(--acc-plum);  } /* Skills */
+.nav-links li:nth-child(6) a::after { background: var(--acc-rose);  } /* Education */
+
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--text-primary); }
 
 .nav-hire-link {
     background: var(--pill-bg);
@@ -164,6 +250,51 @@ h1, h2, h3 {
     background: rgba(226, 180, 138, 0.55);
     border-color: rgba(226, 180, 138, 0.85);
 }
+/* The pill link never gets the underline treatment above */
+.nav-hire-link::after { display: none; content: none; }
+
+/* ── Dark / light mode toggle ────────────────────────────── */
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+.theme-toggle-track {
+    display: flex;
+    align-items: center;
+    width: 46px;
+    height: 25px;
+    padding: 2px;
+    border-radius: 999px;
+    background: var(--glass-fill-nav);
+    border: 1px solid var(--glass-edge);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+.theme-toggle-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: #FFFCF8;
+    box-shadow: 0 1px 3px rgba(30,27,24,0.30);
+    transform: translateX(0);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+[data-theme="dark"] .theme-toggle-thumb {
+    transform: translateX(21px);
+    background: #2E2A25;
+}
+.theme-toggle-thumb svg { width: 12px; height: 12px; }
+.icon-sun  { color: #D98A3D; display: block; }
+.icon-moon { color: #F2ECE2; display: none; }
+[data-theme="dark"] .icon-sun  { display: none; }
+[data-theme="dark"] .icon-moon { display: block; }
 
 /* ── Hamburger button (hidden on desktop) ── */
 .nav-hamburger {
@@ -203,13 +334,14 @@ h1, h2, h3 {
     right: 0;
     left: auto;
     min-width: 200px;
-    background: rgb(210, 200, 188);
+    background: var(--drawer-bg);
     border: 1px solid var(--glass-edge);
     border-top: none;
     border-radius: 0 0 0 16px;
     box-shadow: 0 10px 28px rgba(30,27,24,0.22);
     padding: 8px 0 16px;
     z-index: 99;
+    transition: background 0.4s ease;
 }
 
 .nav-drawer.is-open { display: block; }
@@ -222,6 +354,7 @@ h1, h2, h3 {
 }
 
 .nav-drawer ul li a {
+    position: relative;
     display: block;
     padding: 10px 20px;
     font-family: var(--font-mono);
@@ -239,6 +372,31 @@ h1, h2, h3 {
     color: var(--text-primary);
     background: rgba(255,252,248,0.18);
 }
+
+/* ── Same selected-line treatment, mirrored for the right-aligned
+   drawer items ── */
+.nav-drawer ul li a::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--acc-amber);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s ease;
+}
+.nav-drawer ul li:nth-child(1) a::after { background: var(--acc-sage);  }
+.nav-drawer ul li:nth-child(2) a::after { background: var(--acc-amber); }
+.nav-drawer ul li:nth-child(3) a::after { background: var(--acc-coral); }
+.nav-drawer ul li:nth-child(4) a::after { background: var(--acc-teal);  }
+.nav-drawer ul li:nth-child(5) a::after { background: var(--acc-plum);  }
+.nav-drawer ul li:nth-child(6) a::after { background: var(--acc-rose);  }
+
+.nav-drawer ul li a:hover::after,
+.nav-drawer ul li a.active::after { transform: scaleX(1); }
 
 .nav-drawer .nav-hire-link {
     display: block;
@@ -267,6 +425,7 @@ h1, h2, h3 {
     height: 1px;
     background: var(--glass-edge);
 }
+.nav-drawer .nav-hire-link::after { display: none; content: none; }
 
 /* ============================================================
    HERO
@@ -284,6 +443,18 @@ h1, h2, h3 {
         #ECC99A 38%,
         rgba(232, 210, 175, 0.55) 62%,
         rgba(220, 200, 165, 0.0) 100%
+    );
+    transition: background 0.4s ease;
+}
+
+[data-theme="dark"] .hero {
+    background: linear-gradient(
+        to bottom,
+        #4A3A25 0%,
+        #3E301F 18%,
+        #34291B 38%,
+        rgba(48, 40, 30, 0.5) 62%,
+        rgba(30, 25, 20, 0) 100%
     );
 }
 
@@ -365,15 +536,25 @@ section h2 {
     letter-spacing: -0.015em;
 }
 
+/* Default rule (amber → rose); each section overrides with its
+   own accent pairing via a modifier class, so the page reads as
+   a sequence of related-but-distinct colour moments rather than
+   one repeated gradient. */
 .section-rule {
     display: block;
     width: 36px;
     height: 1px;
-    background: linear-gradient(90deg, var(--spot-amber), var(--spot-rose));
+    background: linear-gradient(90deg, var(--acc-amber), var(--acc-rose));
     margin: 0 auto 32px;
     border: none;
     opacity: 0.75;
 }
+.section-rule.accent-sage  { background: linear-gradient(90deg, var(--acc-sage),  var(--acc-teal));  }
+.section-rule.accent-amber { background: linear-gradient(90deg, var(--acc-amber), var(--acc-coral)); }
+.section-rule.accent-coral { background: linear-gradient(90deg, var(--acc-coral), var(--acc-rose));  }
+.section-rule.accent-teal  { background: linear-gradient(90deg, var(--acc-teal),  var(--acc-plum));  }
+.section-rule.accent-plum  { background: linear-gradient(90deg, var(--acc-plum),  var(--acc-rose));  }
+.section-rule.accent-rose  { background: linear-gradient(90deg, var(--acc-rose),  var(--acc-amber)); }
 
 .about-me p {
     font-size: 1.04em;
@@ -404,6 +585,16 @@ section h2 {
     box-shadow: var(--glass-shadow-h), 0 1px 0 rgba(255,255,255,0.90) inset;
     border-top-color: rgba(255,255,255,0.92);
 }
+[data-theme="dark"] .card:hover {
+    border-top-color: rgba(255,255,255,0.22);
+}
+
+/* Each section's cards pick up that section's accent as a quiet
+   top-border tint, echoing the section rule above them. */
+#experience .card    { border-top-color: rgba(226, 180, 138, 0.65); }
+#publications .card  { border-top-color: rgba(222, 116, 88, 0.55); }
+#projects .card       { border-top-color: rgba(91, 151, 145, 0.55); }
+#education .card      { border-top-color: rgba(143, 160, 131, 0.60); }
 
 .card h3 { font-size: 1.28em; margin-bottom: 6px; line-height: 1.35; }
 .card p  { color: var(--text-secondary); margin-bottom: 8px; }
@@ -431,7 +622,7 @@ section h2 {
     content: '–';
     position: absolute;
     left: 0;
-    color: var(--text-muted);
+    color: var(--acc-amber);
     top: 5px;
 }
 
@@ -450,16 +641,17 @@ section h2 {
     font-size: 0.73em;
     padding: 3px 13px;
     border-radius: var(--radius-pill);
-    background: var(--pill-bg);
+    background: var(--acc-coral-soft);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--pill-border);
+    border: 1px solid rgba(222, 116, 88, 0.55);
     border-top-color: rgba(255,240,220,0.80);
-    color: var(--pill-text);
+    color: #8A3F27;
     margin-bottom: 12px;
     box-shadow: 0 1px 0 rgba(255,255,255,0.65) inset;
     letter-spacing: 0.02em;
 }
+[data-theme="dark"] .pub-status { color: #FFCDB8; }
 
 .pub-authors {
     font-family: var(--font-mono);
@@ -497,9 +689,9 @@ section h2 {
     text-decoration: none;
     border-bottom: 1px solid transparent;
     padding-bottom: 2px;
-    transition: border-color 0.2s, opacity 0.2s;
+    transition: border-color 0.2s, opacity 0.2s, color 0.2s;
 }
-.project-links a:hover { border-color: var(--text-primary); opacity: 0.75; }
+.project-links a:hover { border-color: var(--acc-teal); color: var(--acc-teal); opacity: 1; }
 
 /* ============================================================
    SKILLS
@@ -538,13 +730,31 @@ section h2 {
 .skills-category { margin-bottom: 28px; }
 
 .skills-category h3 {
+    position: relative;
+    display: inline-block;
     font-family: var(--font-heading);
     font-size: 1.05em;
     font-style: italic;
     font-weight: 400;
     color: var(--text-secondary);
     margin-bottom: 13px;
+    padding-bottom: 7px;
 }
+/* A small accent underline per category — General / Languages /
+   Tools each get their own colour so Skills doesn't read as one
+   flat block. */
+.skills-category h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 32px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--acc-amber);
+}
+.skills-category:nth-of-type(2) h3::after { background: var(--acc-teal); }
+.skills-category:nth-of-type(3) h3::after { background: var(--acc-plum); }
 
 .skills-category ul {
     list-style: none;
@@ -598,13 +808,22 @@ section h2 {
 .certifications-section ul li {
     font-family: var(--font-mono);
     font-size: 0.88em;
-    padding: 11px 0;
+    padding: 11px 0 11px 0;
     border-bottom: 1px solid rgba(255,255,255,0.22);
+    border-left: 3px solid transparent;
     color: var(--text-primary);
-    transition: color 0.2s, padding-left 0.2s;
+    transition: color 0.2s, padding-left 0.2s, border-left-color 0.2s;
 }
-.certifications-section ul li:hover { padding-left: 6px; }
+.certifications-section ul li:hover { padding-left: 12px; }
 .certifications-section ul li:last-child { border-bottom: none; }
+
+/* Each certification picks up a different accent on hover, so the
+   list reads as five small colour moments rather than one line */
+.certifications-section ul li:nth-child(1):hover { border-left-color: var(--acc-amber); }
+.certifications-section ul li:nth-child(2):hover { border-left-color: var(--acc-teal);  }
+.certifications-section ul li:nth-child(3):hover { border-left-color: var(--acc-coral); }
+.certifications-section ul li:nth-child(4):hover { border-left-color: var(--acc-plum);  }
+.certifications-section ul li:nth-child(5):hover { border-left-color: var(--acc-sage);  }
 
 /* ============================================================
    FOOTER
@@ -619,6 +838,10 @@ section h2 {
     padding: 56px 0 30px;
     text-align: center;
     margin-top: auto;
+    transition: background 0.4s ease;
+}
+[data-theme="dark"] .contact-footer {
+    background: rgba(0, 0, 0, 0.22);
 }
 
 .footer-logo {
@@ -641,7 +864,7 @@ section h2 {
 }
 
 .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--text-primary); }
+.footer-links a:hover { color: var(--acc-coral); }
 
 .copyright { font-family: var(--font-mono); font-size: 0.73em; color: var(--text-muted); }
 
