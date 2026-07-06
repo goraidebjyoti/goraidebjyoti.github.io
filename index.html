@@ -252,10 +252,10 @@
             <h2>Technical Skills</h2>
             <hr class="section-rule accent-plum">
             <div class="skills-legend reveal">
-                <span class="legend-item"><span class="legend-dot legend-strong"></span>Proficient</span>
-                <span class="legend-item"><span class="legend-dot legend-familiar"></span>Familiar</span>
+                <span class="legend-item legend-item-strong"><span class="legend-dot legend-strong"></span>Proficient</span>
+                <span class="legend-item legend-item-familiar"><span class="legend-dot legend-familiar"></span>Familiar</span>
             </div>
-            <div class="skills-category reveal">
+            <div class="skills-category cat-general reveal">
                 <h3>General</h3>
                 <ul>
                     <li>Natural Language Processing</li>
@@ -269,7 +269,7 @@
                     <li class="skill-familiar">Network Programming</li>
                 </ul>
             </div>
-            <div class="skills-category reveal">
+            <div class="skills-category cat-languages reveal">
                 <h3>Languages</h3>
                 <ul>
                     <li>Python</li>
@@ -281,7 +281,7 @@
                     <li class="skill-familiar">JavaScript</li>
                 </ul>
             </div>
-            <div class="skills-category reveal">
+            <div class="skills-category cat-tools reveal">
                 <h3>Tools &amp; Platforms</h3>
                 <ul>
                     <li>GitHub</li>
@@ -378,6 +378,12 @@
     });
 
     // ── Active nav (desktop links + drawer links) ────────────────
+    // Uses a fixed viewport "band" near the middle of the screen rather
+    // than a percentage of each section's own height — a threshold-based
+    // observer needs 25% of a section to be visible at once, which a
+    // short section like Publications hits easily but a long one like
+    // Projects (many stacked cards, several viewport-heights tall) may
+    // never satisfy, so it never lit up.
     const sections  = document.querySelectorAll('section[id]');
     const allLinks  = document.querySelectorAll('.nav-links a, .nav-drawer a');
 
@@ -389,7 +395,7 @@
                     .forEach(a => a.classList.add('active'));
             }
         });
-    }, { threshold: 0.25 });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     sections.forEach(s => navObserver.observe(s));
 
     // ── Scroll-reveal ────────────────────────────────────────────
