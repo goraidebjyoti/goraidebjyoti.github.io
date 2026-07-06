@@ -104,23 +104,29 @@ body {
     min-height: 100vh;
 
     background-color: var(--bg-base);
+    /* Full six-hue wash (amber/teal/warm-neutral/coral/plum/sage) rather
+       than tan-on-tan — matches the hire page's palette so both sites
+       read as one colourful family instead of the portfolio looking
+       comparatively flat next to it. */
     background-image:
-        radial-gradient(ellipse 70% 50% at  8%  8%,  #E0C4A0 0%, transparent 58%),
-        radial-gradient(ellipse 55% 40% at 92% 15%,  #C8B8A8 0%, transparent 50%),
-        radial-gradient(ellipse 75% 45% at 50% 52%,  #D0BEA4 0%, transparent 55%),
-        radial-gradient(ellipse 55% 38% at 15% 88%,  #D4A882 0%, transparent 48%),
-        radial-gradient(ellipse 48% 35% at 88% 84%,  #C4B89A 0%, transparent 45%);
+        radial-gradient(ellipse 65% 48% at  6%  6%,  #E7C9A0 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 95% 10%,  #BFD3CC 0%, transparent 50%),
+        radial-gradient(ellipse 60% 42% at 50% 46%,  #D8C2AE 0%, transparent 55%),
+        radial-gradient(ellipse 55% 38% at 10% 90%,  #D6A98A 0%, transparent 48%),
+        radial-gradient(ellipse 48% 36% at 92% 88%,  #C9AFC2 0%, transparent 46%),
+        radial-gradient(ellipse 40% 30% at 60% 78%,  #A9C0B4 0%, transparent 42%);
     background-attachment: fixed;
     transition: background-color 0.4s ease;
 }
 
 [data-theme="dark"] body {
     background-image:
-        radial-gradient(ellipse 70% 50% at  8%  8%,  rgba(224, 196, 160, 0.16) 0%, transparent 58%),
-        radial-gradient(ellipse 55% 40% at 92% 15%,  rgba(200, 184, 168, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 75% 45% at 50% 52%,  rgba(208, 190, 164, 0.10) 0%, transparent 55%),
-        radial-gradient(ellipse 55% 38% at 15% 88%,  rgba(212, 168, 130, 0.14) 0%, transparent 48%),
-        radial-gradient(ellipse 48% 35% at 88% 84%,  rgba(196, 184, 154, 0.12) 0%, transparent 45%);
+        radial-gradient(ellipse 65% 48% at  6%  6%,  rgba(231, 201, 160, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 95% 10%,  rgba(191, 211, 204, 0.14) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 42% at 50% 46%,  rgba(216, 194, 174, 0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 38% at 10% 90%,  rgba(214, 169, 138, 0.14) 0%, transparent 48%),
+        radial-gradient(ellipse 48% 36% at 92% 88%,  rgba(201, 175, 194, 0.13) 0%, transparent 46%),
+        radial-gradient(ellipse 40% 30% at 60% 78%,  rgba(169, 192, 180, 0.12) 0%, transparent 42%);
 }
 
 h1, h2, h3 {
@@ -589,6 +595,9 @@ section h2 {
     border-top-color: rgba(255,255,255,0.22);
 }
 
+/* Each section's cards pick up that section's accent as a top-border
+   tint plus a coloured left spine, so the colour reads at a glance
+   rather than only showing up on hover. */
 /* Each section's cards pick up that section's accent as a quiet
    top-border tint, echoing the section rule above them. */
 #experience .card    { border-top-color: rgba(226, 180, 138, 0.65); }
@@ -706,11 +715,15 @@ section h2 {
 .legend-item {
     font-family: var(--font-mono);
     font-size: 0.76em;
-    color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 7px;
 }
+/* Text colour mirrors the pills themselves — dark/solid for Proficient,
+   faded for Familiar — so the legend actually reads as a key for what
+   you see below instead of two neutral grey dots. */
+.legend-item-strong    { color: var(--text-primary); }
+.legend-item-familiar  { color: var(--text-muted); }
 
 .legend-dot {
     width: 12px; height: 12px;
@@ -718,13 +731,22 @@ section h2 {
     display: inline-block;
     flex-shrink: 0;
 }
+/* Tied to var(--text-primary) rather than a fixed white — in light
+   mode that's the same near-black as the "Proficient" label and the
+   proficient pill text; in dark mode it switches to the same off-white
+   those use too, so the dot and the thing it's representing always
+   match instead of only lining up in one theme. */
 .legend-strong {
-    background: rgba(255, 252, 248, 0.85);
-    border: 1.5px solid rgba(30,27,24,0.35);
+    background: var(--text-primary);
+    border: 1.5px solid var(--text-primary);
 }
 .legend-familiar {
-    background: rgba(255, 252, 248, 0.28);
-    border: 1.5px solid rgba(255,255,255,0.40);
+    background: rgba(150, 145, 138, 0.20);
+    border: 1.5px solid rgba(150, 145, 138, 0.40);
+}
+[data-theme="dark"] .legend-familiar {
+    background: rgba(120, 116, 110, 0.30);
+    border-color: rgba(120, 116, 110, 0.45);
 }
 
 .skills-category { margin-bottom: 28px; }
@@ -742,7 +764,11 @@ section h2 {
 }
 /* A small accent underline per category — General / Languages /
    Tools each get their own colour so Skills doesn't read as one
-   flat block. */
+   flat block. Uses explicit classes rather than :nth-of-type, since
+   the legend div above these shares the same tag name and was
+   throwing the position-based count off by one (General was
+   quietly getting Languages' colour, and Tools fell through to
+   this base rule instead of its own). */
 .skills-category h3::after {
     content: '';
     position: absolute;
@@ -751,10 +777,10 @@ section h2 {
     width: 32px;
     height: 2px;
     border-radius: 2px;
-    background: var(--acc-amber);
+    background: var(--acc-sage);
 }
-.skills-category:nth-of-type(2) h3::after { background: var(--acc-teal); }
-.skills-category:nth-of-type(3) h3::after { background: var(--acc-plum); }
+.skills-category.cat-languages h3::after { background: var(--acc-teal); }
+.skills-category.cat-tools h3::after { background: var(--acc-plum); }
 
 .skills-category ul {
     list-style: none;
@@ -764,7 +790,10 @@ section h2 {
     gap: 9px;
 }
 
-/* Solid fill — no backdrop-filter on pills */
+/* Solid fill — no backdrop-filter on pills. Each category is tinted
+   with its own accent so Skills isn't one flat block of white pills;
+   "Familiar" items stay neutral/muted regardless of category so the
+   proficiency legend (dot colour) is still the only signal for that. */
 .skills-category ul li {
     background: rgba(255, 252, 248, 0.62);
     color: var(--text-primary);
@@ -784,17 +813,45 @@ section h2 {
     transform: translateY(-2px);
 }
 
+.skills-category.cat-general ul li:not(.skill-familiar) {
+    background: var(--acc-sage-soft);
+    border-color: rgba(143, 160, 131, 0.45);
+    border-top-color: rgba(143, 160, 131, 0.70);
+}
+.skills-category.cat-general ul li:not(.skill-familiar):hover { background: rgba(143, 160, 131, 0.42); }
+
+.skills-category.cat-languages ul li:not(.skill-familiar) {
+    background: var(--acc-teal-soft);
+    border-color: rgba(91, 151, 145, 0.45);
+    border-top-color: rgba(91, 151, 145, 0.70);
+}
+.skills-category.cat-languages ul li:not(.skill-familiar):hover { background: rgba(91, 151, 145, 0.38); }
+
+.skills-category.cat-tools ul li:not(.skill-familiar) {
+    background: var(--acc-plum-soft);
+    border-color: rgba(155, 107, 148, 0.45);
+    border-top-color: rgba(155, 107, 148, 0.70);
+}
+.skills-category.cat-tools ul li:not(.skill-familiar):hover { background: rgba(155, 107, 148, 0.38); }
+
 .skills-category ul li.skill-familiar {
     color: var(--text-muted);
-    background: rgba(255, 252, 248, 0.30);
-    border-color: rgba(255,255,255,0.30);
-    border-top-color: rgba(255,255,255,0.50);
+    background: rgba(150, 145, 138, 0.20);
+    border: 1px solid rgba(150, 145, 138, 0.35);
+    border-top-color: rgba(150, 145, 138, 0.45);
     box-shadow: none;
 }
 
 .skills-category ul li.skill-familiar:hover {
-    background: rgba(255, 252, 248, 0.50);
+    background: rgba(150, 145, 138, 0.34);
     color: var(--text-secondary);
+}
+[data-theme="dark"] .skills-category ul li.skill-familiar {
+    background: rgba(120, 116, 110, 0.30);
+    border-color: rgba(120, 116, 110, 0.42);
+}
+[data-theme="dark"] .skills-category ul li.skill-familiar:hover {
+    background: rgba(120, 116, 110, 0.44);
 }
 
 /* ============================================================
@@ -868,7 +925,7 @@ section h2 {
 
 .copyright { font-family: var(--font-mono); font-size: 0.73em; color: var(--text-muted); }
 
-.email-at { font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0; }
+.email-at { font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0; color: var(--acc-coral); }
 
 /* ============================================================
    RESPONSIVE — 768px
