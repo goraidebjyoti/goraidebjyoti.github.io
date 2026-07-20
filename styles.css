@@ -702,6 +702,16 @@ section h2 {
 }
 .project-links a:hover { border-color: var(--acc-teal); color: var(--acc-teal); opacity: 1; }
 
+/* Plain-text note for projects with no public repo (e.g. NDA-covered
+   work) — same rhythm as .project-links but muted and non-interactive
+   so it reads as a caption, not a dead link. */
+.project-links-note {
+    font-family: var(--font-mono);
+    font-size: 0.83em;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
 /* ============================================================
    SKILLS
    ============================================================ */
